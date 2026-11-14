@@ -1,0 +1,41 @@
+[
+    {
+        "id": "P001",
+        "name": "Laptop",
+        "price": 1000.0,
+        "stock": 1000,
+        "supplier": {
+            "id": "Unknown",
+            "name": "Unknown supplier",
+            "contact_email": ""
+        },
+        "type": "physical",
+        "weight": 100.0
+    },
+    {
+        "id": "P002",
+        "name": "Ebook",
+        "price": 100.0,
+        "stock": 10,
+        "supplier": {
+            "id": "D001",
+            "name": "Ebook Supplier",
+            "contact_email": "Ebook@supplier.com"
+        },
+        "type": "digital",
+        "download_size": 100.0
+    },
+    {
+        "id": "P003",
+        "name": "Pamphlet",
+        "price": 100.0,
+        "stock": 10,
+        "supplier": {
+            "id": "D002",
+            "name": "Pampy",
+            "contact_email": "pamphlet@gmail.com"
+        },
+        "type": "digital",
+        "download_size": 10.0
+    }
+]
