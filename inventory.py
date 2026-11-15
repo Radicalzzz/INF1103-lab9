@@ -1,9 +1,11 @@
 import json
+import csv
 
 from product import Product
 from physicalproduct import PhysicalProduct
 from digitalproduct import DigitalProduct
 from supplier import Supplier
+from productfactory import ProductFactory
 
 class Inventory:
     def __init__(self) -> None:
@@ -136,3 +138,40 @@ class Inventory:
             loaded_products.append(product)
             
         self.__products = loaded_products
+
+    def load_products(self, path: str, supplier: Supplier) -> None:
+        try:
+            file = open(path, newline="", encoding="utf-8")
+        except FileNotFoundError:
+            print(f"Products file not found: {path}")
+
+        else:
+            loaded = 0
+            with file:
+                reader = csv.reader(file)
+                next(reader, None)  # Skip the header
+
+                for row_number, row in enumerate(reader, start=2):
+                    try:
+                        if len(row) != 5:
+                            raise ValueError("Expected 5 columns.")
+
+                        product = ProductFactory.create(
+                            product_type=row[0],
+                            product_id=row[1],
+                            name=row[2],
+                            price=float(row[3]),
+                            stock_quantity=int(row[4]),
+                            supplier=supplier
+                        )
+
+                        self.add_product(product)
+                        loaded += 1
+
+                    except ValueError as error:
+                        print(f"Row {row_number} skipped: {error}")
+
+            print(f"{loaded} products loaded.")
+
+        finally:
+            print("Load attempt finished.")

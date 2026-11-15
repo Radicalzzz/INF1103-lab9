@@ -4,6 +4,7 @@ from supplier import Supplier
 from physicalproduct import PhysicalProduct
 from productfactory import ProductFactory
 from orderline import OrderLine
+from inventory import Inventory
 
 print(NoDiscount().apply(100))  # Output: 100
 print(PercentageDiscount(10).apply(100))  # Output: 90
@@ -45,3 +46,10 @@ try:
 
 except ValueError as error:
     print(error)
+
+inventory = Inventory()
+inventory.load_products("products.csv", supplier)
+
+
+
+
