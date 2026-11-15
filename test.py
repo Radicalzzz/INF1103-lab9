@@ -3,6 +3,7 @@ from order import Order
 from supplier import Supplier
 from physicalproduct import PhysicalProduct
 from productfactory import ProductFactory
+from orderline import OrderLine
 
 print(NoDiscount().apply(100))  # Output: 100
 print(PercentageDiscount(10).apply(100))  # Output: 90
@@ -26,3 +27,21 @@ for product in [keyboard, ebook]:
     product.display_information()
     print(product.get_fulfilment_info())
     print()
+
+try:
+    ProductFactory.create("physical", "P100", "Invalid Product", 0.0, 10, supplier, weight=1.0)
+
+except ValueError as error:
+    print(error)
+
+try:
+    keyboard.update_stock(-5)
+
+except ValueError as error:
+    print(error)
+
+try:
+    OrderLine(keyboard, 0)
+
+except ValueError as error:
+    print(error)

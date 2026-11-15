@@ -10,7 +10,7 @@ class ProductFactory:
         if product_type == "physical":
             return PhysicalProduct(product_id, name, price, stock_quantity, weight, supplier)
         
-        if product_type == "digital":
+        elif product_type == "digital":
             return DigitalProduct(product_id, name, price, stock_quantity, download_size, supplier)
         
         else:
