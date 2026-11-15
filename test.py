@@ -1,7 +1,8 @@
-from discountstrategy import DiscountStrategy, NoDiscount, PercentageDiscount, BulkDiscount
+from discountstrategy import NoDiscount, PercentageDiscount, BulkDiscount, StudentDiscount
 from order import Order
 from supplier import Supplier
 from physicalproduct import PhysicalProduct
+from productfactory import ProductFactory
 
 print(NoDiscount().apply(100))  # Output: 100
 print(PercentageDiscount(10).apply(100))  # Output: 90
@@ -14,3 +15,14 @@ order.add_order_line(product,2)
 print(f"Bulk discount total: {order.calculate_total():.2f}") # Output: 230.00
 order.set_discount(PercentageDiscount(10))
 print(f"Percentage discount total: {order.calculate_total():.2f}") # Output: 225.00
+
+order.set_discount(StudentDiscount())
+print(f"Student discount total: {order.calculate_total():.2f}") # Output: 237.50
+
+keyboard = ProductFactory.create("physical", "P010", "Mechanical Keyboard", 80.0, 50, supplier, weight=1.2)
+ebook = ProductFactory.create("digital", "D010", "Python Programming", 20.0, 100, supplier, download_size=5.0)
+
+for product in [keyboard, ebook]:
+    product.display_information()
+    print(product.get_fulfilment_info())
+    print()
