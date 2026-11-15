@@ -16,13 +16,9 @@ def add_product(inventory) -> None:
     if not product_name:
         raise ValueError("Product name cannot be empty.")
 
-    price = float(input("Enter the product price: "))
-    if price < 0:
-        raise ValueError("Price cannot be negative.")
+    price = get_positive_float("Enter the product price: ")
     
-    quantity = int(input("Enter the product quantity: "))
-    if quantity < 0:
-        raise ValueError("Quantity cannot be negative.")
+    quantity = get_non_negative_int("Enter stock quantity: ")
     
     # Placeholder for generating a unique product ID
     number = 1
@@ -79,6 +75,28 @@ def search_product(inventory) -> None:
     else:
         print("Product found:")
         product.display_information()
+
+def get_positive_float(prompt: str) -> float:
+    while True:
+        try:
+            value = float(input(prompt))
+            if value <= 0:
+                print("Please enter a number greater than zero")
+                continue
+            return value
+        except ValueError:
+            print("Please enter a valid number, e.g 12.50")
+
+def get_non_negative_int(prompt: str) -> int:
+    while True:
+        try:
+            value = int(input(prompt))
+            if value < 0:
+                print("Please enter zero or a positive integer.")
+                continue
+            return value
+        except ValueError:
+            print("Please enter a whole number, e.g. 10.")
 
 def main() -> None:
     inventory = Inventory()
